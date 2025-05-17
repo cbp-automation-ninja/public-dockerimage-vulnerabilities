@@ -22,7 +22,7 @@ jobs:
           api-token: ${{ secrets.BD_API_TOKEN }}
           project-name: public-dockerimage-vulnerabilities
           project-version: 0.0.1
-          detect-cli-params: --detect.tools=CONTAINER_SCAN --detect.container.scan.file.path=https://hub.docker.com/repository/docker/ambikabhat13/node-app
+          detect-cli-params: --detect.tools=DOCKER --detect.docker.image=node:18-alpine3.20
         #   detect-cli-params: --detect.detector.required.accuracy=HIGH
-          ref: master
+          ref: main
   
