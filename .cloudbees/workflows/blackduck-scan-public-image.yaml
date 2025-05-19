@@ -1,4 +1,4 @@
-name: blackduck-hybrid-plugin-image-scan
+name: blackduck-hybrid-plugin
 kind: workflow
 apiVersion: automation.cloudbees.io/v1alpha1
 on:
@@ -15,14 +15,19 @@ jobs:
     steps:
       - name: checkout Source Code
         uses: cloudbees-io/checkout@v1
+      - name: pull Docker image
+        uses: https://hub.docker.com/layers/library/ubuntu/oracular-20240811.1/images/sha256-6db2266aa8d3b2836c42040cc02833ca87a14d7b926f4fe1d5bb2a00e15ce2fe
+        run: |
+          docker pull ubuntu:oracular-20240811.1
+          docker save -o ubuntu_latest.tar ubuntu:oracular-20240811.1
       - name: black duck hybrid plugin scan
         uses: cloudbees-io/blackduck-sca-scan-dependency@apr
         with:
           server-url: https://blackduck.saas-qa.beescloud.com
           api-token: ${{ secrets.BD_API_TOKEN }}
-          project-name: public-dockerimage-vulnerabilities
+          project-name: blackduckscan-Go-testing
           project-version: 0.0.1
-          detect-cli-params: --detect.tools=CONTAINER_SCAN --detect.container.scan.file.path=node:18-alpine3.20
+          detect-cli-params: --detect.docker.tar=ubuntu_latest.tar --detect.tools=DOCKER
         #   detect-cli-params: --detect.detector.required.accuracy=HIGH
-          ref: main
+        #   ref: main
   
