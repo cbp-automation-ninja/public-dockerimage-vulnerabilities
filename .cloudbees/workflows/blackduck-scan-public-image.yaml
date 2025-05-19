@@ -19,11 +19,11 @@ jobs:
     #     uses: docker://ubuntu:20.04
       - name: install Docker
         uses: docker://ubuntu:20.04
-        run: |
-          apt-get update
-          apt-get install -y docker.io |
-      - name: pull Docker image
-        uses: docker://
+    #     run: |
+    #       apt-get update
+    #       apt-get install -y docker.io |
+    #   - name: pull Docker image
+    #     uses: docker://
         run: |
           docker pull ubuntu:oracular-20240811.1
           docker save -o ubuntu_latest.tar ubuntu:oracular-20240811.1
