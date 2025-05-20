@@ -22,7 +22,7 @@ jobs:
       - name: Install Dependencies
         uses: docker://node:18.15.0-alpine
         run: |
-          docker pull unode:18.15.0-alpine
+          docker pull node:18.15.0-alpine
           docker save -o node.tar node:18.15.0-alpine
 
       - name: Run Black Duck hybrid scan
