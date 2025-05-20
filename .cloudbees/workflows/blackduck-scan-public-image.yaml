@@ -1,37 +1,47 @@
 name: blackduck-hybrid-plugin
 kind: workflow
 apiVersion: automation.cloudbees.io/v1alpha1
+
 on:
   push:
     branches:
       - blackduck-hybrid-plugin-test
   workflow_dispatch:
+
 permissions:
   scm-token-own: read
   scm-token-org: read
   id-token: write
+
 jobs:
   blackduck-hybrid-scan:
     steps:
-      - name: checkout Source Code
+      - name: Checkout source code
         uses: cloudbees-io/checkout@v1
-    #   - name: use Docker image
-    #     uses: docker://ubuntu:20.04
-      - name: install Docker
-        uses: docker://ubuntu:20.04
+
+      - name: Set up Docker-enabled container
+        uses: docker://docker:24.0.6-dind
+        shell: sh
         run: |
-          apt-get update
-          apt-get install -y docker.io |
-      - name: pull Docker image
-        uses: docker.io
-        run: |
+          dockerd-entrypoint.sh &
+
+          # Wait for Docker daemon to be ready
+          until docker info >/dev/null 2>&1; do
+            echo "Waiting for Docker daemon..."
+            sleep 2
+          done
+
+          # Pull the image and save to tar
           docker pull ubuntu:oracular-20240811.1
           docker save -o ubuntu_latest.tar ubuntu:oracular-20240811.1
-      - name: black duck hybrid plugin scan
+
+      - name: Run Black Duck hybrid scan
         uses: cloudbees-io/blackduck-sca-scan-dependency@apr
         with:
           server-url: https://blackduck.saas-qa.beescloud.com
           api-token: ${{ secrets.BD_API_TOKEN }}
           project-name: blackduckscan-Go-testing
           project-version: 0.0.1
-          detect-cli-params: --detect.docker.tar=ubuntu_latest.tar --detect.tools=DOCKER
+          detect-cli-params: >-
+            --detect.docker.tar=ubuntu_latest.tar
+            --detect.tools=DOCKER
