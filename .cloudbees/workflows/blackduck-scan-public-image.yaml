@@ -19,14 +19,11 @@ jobs:
       - name: Checkout source code
         uses: cloudbees-io/checkout@v1
 
-      - name: Pull Docker image and save to tar
-        uses: docker://docker:24.0-cli
+      - name: Install Dependencies
+        uses: docker://node:18.15.0-alpine
         run: |
-          docker --version
-          docker info
-
-          docker pull ubuntu:oracular-20240811.1
-          docker save -o ubuntu_latest.tar ubuntu:oracular-20240811.1
+          docker pull unode:18.15.0-alpine
+          docker save -o node.tar node:18.15.0-alpine
 
       - name: Run Black Duck hybrid scan
         uses: cloudbees-io/blackduck-sca-scan-dependency@apr
@@ -36,5 +33,5 @@ jobs:
           project-name: blackduckscan-Go-testing
           project-version: 0.0.1
           detect-cli-params: >-
-            --detect.docker.tar=ubuntu_latest.tar
+            --detect.docker.tar=node.tar
             --detect.tools=DOCKER
