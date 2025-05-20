@@ -24,10 +24,8 @@ jobs:
         shell: sh
         run: |
           dockerd-entrypoint.sh &
-
-          # Wait for Docker daemon to be ready
           until docker info >/dev/null 2>&1; do
-            echo "Waiting for Docker daemon..."
+          echo "Waiting for Docker daemon..."
             sleep 2
           done
 
