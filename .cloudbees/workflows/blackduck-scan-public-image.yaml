@@ -18,12 +18,12 @@ jobs:
     steps:
       - name: Checkout source code
         uses: cloudbees-io/checkout@v1
+
       - name: Save Docker image
         uses: docker://docker:24.0.7-cli  # 🐳 Docker CLI image
-        run: |
-            docker version
-            docker pull node:18.15.0-alpine
-            docker save -o node.tar node:18.15.0-alpine
+        with:
+          entrypoint: /bin/sh
+          args: -c "docker version && docker pull node:18.15.0-alpine && docker save -o node.tar node:18.15.0-alpine"
 
       - name: Run Black Duck hybrid scan
         uses: cloudbees-io/blackduck-sca-scan-dependency@apr
