@@ -35,6 +35,6 @@ jobs:
           project-name: blackduckscan-Go-testing
           project-version: 0.0.1
           detect-cli-params:
-            --detect.container.scan.file.path=public.ecr.aws/l7o7z1g8/actions/plugin-blackduck-sca:093c3ce91bfa01062b62922776d36900f83a7860
+            --detect.docker.image=docker:24.0.7-cli
             --detect.tools=CONTAINER_SCAN
         
