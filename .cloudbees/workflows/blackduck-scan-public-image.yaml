@@ -1,18 +1,17 @@
 name: blackduck-hybrid-plugin
 kind: workflow
 apiVersion: automation.cloudbees.io/v1alpha1
-
 on:
   push:
     branches:
       - blackduck-hybrid-plugin-test
   workflow_dispatch:
-
+  schedule:
+    - cron: 0 9 * * *
 permissions:
   scm-token-own: read
   scm-token-org: read
   id-token: write
-
 jobs:
   blackduck-hybrid-scan:
     steps:
@@ -28,7 +27,4 @@ jobs:
           api-token: ${{ secrets.BD_API_TOKEN }}
           project-name: blackduckscan-Go-testing
           project-version: 0.0.1
-          detect-cli-params:
-            --detect.docker.image=docker:24.0.7-cli
-            --detect.tools=CONTAINER_SCAN
-        
+          detect-cli-params: --detect.docker.image=docker:24.0.7-cli --detect.tools=CONTAINER_SCAN
