@@ -20,12 +20,6 @@ jobs:
         uses: cloudbees-io/checkout@v1
         with:
           ref: main
-
-    #   - name: Save Docker image
-    #     uses: docker://docker:24.0.7-cli  # 🐳 Docker CLI image
-    #     run: |
-    #      docker start docker pull node:18.15.0-alpine && docker save -o node.tar node:18.15.0-alpine
-
       - name: Run Black Duck hybrid scan
         uses: cloudbees-io/blackduck-sca-scan-dependency@apr
         with:
@@ -36,5 +30,6 @@ jobs:
           project-version: 0.0.1
           detect-cli-params:
             --detect.docker.image=docker:24.0.7-cli
+            --detect.docker.image=node:18.15.0-alpine
             --detect.tools=CONTAINER_SCAN
         
