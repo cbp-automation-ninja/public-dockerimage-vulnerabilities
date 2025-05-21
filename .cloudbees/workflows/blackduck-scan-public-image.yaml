@@ -30,6 +30,5 @@ jobs:
           project-version: 0.0.1
           detect-cli-params:
             --detect.docker.image=docker:24.0.7-cli
-            --detect.docker.image=node:18.15.0-alpine
             --detect.tools=CONTAINER_SCAN
         
