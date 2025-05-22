@@ -29,4 +29,4 @@ jobs:
           project-version: 0.0.1
           detect-cli-params:
                  --detect.docker.image=docker:24.0.7-cli
-                 --detect.tools=DETECTOR --detect.tools=SIGNATURE_SCAN, BINARY_SCAN,CONTAINER_SCAN
+                 --detect.tools=CONTAINER_SCAN
