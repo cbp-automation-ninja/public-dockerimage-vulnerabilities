@@ -27,4 +27,6 @@ jobs:
           api-token: ${{ secrets.BD_API_TOKEN }}
           project-name: public-dockerimage-vulnerabilities
           project-version: 0.0.1
-          detect-cli-params: --detect.docker.image=docker:24.0.7-cli --detect.tools=CONTAINER_SCAN
+          detect-cli-params:
+                 --detect.docker.image=docker:24.0.7-cli
+                 --detect.tools=DETECTOR --detect.tools=SIGNATURE_SCAN, BINARY_SCAN,CONTAINER_SCAN
