@@ -20,6 +20,12 @@ jobs:
         uses: cloudbees-io/checkout@v1
         with:
           ref: main
+      - name: Install Dependencies
+        uses: docker://node:21.7-alpine3.18
+        run: |
+            npm ci
+    #   - name: Execute e2e tests
+    #     uses: docker://mcr.microsoft.com/playwright:v1.51.0-noble
       - name: Run Black Duck hybrid scan
         uses: cloudbees-io/blackduck-sca-scan-dependency@apr
         with:
