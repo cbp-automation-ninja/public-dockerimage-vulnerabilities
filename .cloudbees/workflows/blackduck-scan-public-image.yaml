@@ -28,6 +28,6 @@ jobs:
           project-name: public-dockerimage-vulnerabilities
           project-version: 0.0.1
           detect-cli-params:
-            ./detect10.sh --detect.docker.image=ubuntu:noble-20250415.1 --detect.docker.passthrough.service.timeout=480000
+            ./detect10.sh --detect.docker.image=vulnerable/nginx:1.15 --detect.docker.passthrough.service.timeout=480000
                 #  --detect.docker.image=docker:24.0.7-cli
                 #  --detect.tools=CONTAINER_SCAN
