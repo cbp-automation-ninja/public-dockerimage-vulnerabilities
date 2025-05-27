@@ -21,7 +21,7 @@ jobs:
         with:
           ref: main
       - name: Install Dependencies
-        uses: docker://node:21.7-alpine3.18
+        uses: docker://alpine:3.18
         run: |
             npm ci
     #   - name: Execute e2e tests
