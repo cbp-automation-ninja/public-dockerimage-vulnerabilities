@@ -28,5 +28,5 @@ jobs:
           project-name: public-dockerimage-vulnerabilities
           project-version: 0.0.1
           detect-cli-params:
-                 --detect.docker.image=vulnerables/web-dvwa
+                 --detect.docker.image=vulnerables/web-dvwa:latest
                  --detect.tools=CONTAINER_SCAN
