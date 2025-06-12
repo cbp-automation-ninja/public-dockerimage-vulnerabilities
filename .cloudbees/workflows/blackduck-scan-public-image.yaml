@@ -28,5 +28,5 @@ jobs:
           project-name: public-dockerimage-vulnerabilities
           project-version: 0.0.1
           detect-cli-params:
-                 --detect.docker.image=vulnerable/nginx:1.15
+                 --detect.docker.image=bkimminich/juice-shop
                  --detect.tools=CONTAINER_SCAN
